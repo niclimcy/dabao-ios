@@ -9,11 +9,24 @@ final class RestaurantListViewController: UIViewController {
     private let service: RestaurantServicing
     private var restaurants: [Restaurant] = []
 
-    private enum Section { case main }
+    private nonisolated enum Section { case main }
     private var dataSource: UITableViewDiffableDataSource<Section, Restaurant>!
 
     private let tableView = UITableView(frame: .zero, style: .plain)
     private let spinner = UIActivityIndicatorView(style: .large)
+    private let searchController = UISearchController(searchResultsController: nil)
+    private let emptyLabel = UILabel()
+    private var searchText = ""
+
+    /// Restaurants whose name or cuisine contains the search text (all if the text is empty).
+    private var filteredRestaurants: [Restaurant] {
+        let query = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !query.isEmpty else { return restaurants }
+        return restaurants.filter {
+            $0.name.localizedCaseInsensitiveContains(query)
+                || $0.cuisine.localizedCaseInsensitiveContains(query)
+        }
+    }
 
     init(service: RestaurantServicing = RestaurantService()) {
         self.service = service
@@ -31,8 +44,22 @@ final class RestaurantListViewController: UIViewController {
         view.backgroundColor = .systemBackground
 
         setUpTableView()
+        setUpSearch()
         setUpSpinner()
         loadRestaurants()
+    }
+
+    private func setUpSearch() {
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search restaurants or cuisine"
+        navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = false
+        definesPresentationContext = true
+
+        emptyLabel.text = "No restaurants found"
+        emptyLabel.textColor = .secondaryLabel
+        emptyLabel.textAlignment = .center
     }
 
     private func setUpTableView() {
@@ -86,8 +113,12 @@ final class RestaurantListViewController: UIViewController {
     private func applySnapshot() {
         var snapshot = NSDiffableDataSourceSnapshot<Section, Restaurant>()
         snapshot.appendSections([.main])
-        snapshot.appendItems(restaurants)
+        let items = filteredRestaurants
+        snapshot.appendItems(items)
         dataSource.apply(snapshot, animatingDifferences: false)
+
+        let isSearching = !searchText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+        tableView.backgroundView = (isSearching && items.isEmpty) ? emptyLabel : nil
     }
 
     private func showError() {
@@ -96,6 +127,14 @@ final class RestaurantListViewController: UIViewController {
                                       preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default))
         present(alert, animated: true)
+    }
+}
+
+extension RestaurantListViewController: UISearchResultsUpdating {
+
+    func updateSearchResults(for searchController: UISearchController) {
+        searchText = searchController.searchBar.text ?? ""
+        applySnapshot()
     }
 }
 
