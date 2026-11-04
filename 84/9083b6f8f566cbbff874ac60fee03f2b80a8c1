@@ -1,0 +1,16 @@
+Dabao/Features/Menu/MenuPresenter.swift
+  h_36695e5767c2ad 8
+Dabao/Features/RestaurantInfo/RestaurantInfoPresenter.swift
+  h_36695e5767c2ad 5
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "849083b6f8f566cbbff874ac60fee03f2b80a8c1",
+  "prompts": {},
+  "humans": {
+    "h_36695e5767c2ad": {
+      "author": "Nicholas Lim <nic.lim@foodpanda.com>"
+    }
+  }
+}
