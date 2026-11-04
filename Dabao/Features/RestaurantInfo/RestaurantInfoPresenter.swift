@@ -2,6 +2,7 @@ import Foundation
 
 @MainActor
 final class RestaurantInfoPresenter: RestaurantInfoPresenterProtocol, RestaurantInfoInteractorOutputProtocol {
+    nonisolated deinit {}
 
     weak var view: RestaurantInfoViewProtocol?
     private let interactor: RestaurantInfoInteractorInputProtocol

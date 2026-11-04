@@ -5,6 +5,7 @@ import Foundation
 /// view models (ready-to-show strings) for the view.
 @MainActor
 final class MenuPresenter: MenuPresenterProtocol, MenuInteractorOutputProtocol {
+    nonisolated deinit {}
 
     weak var view: MenuViewProtocol?
     private let interactor: MenuInteractorInputProtocol
