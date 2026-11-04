@@ -33,6 +33,22 @@ final class RestaurantInfoPresenter: RestaurantInfoPresenterProtocol, Restaurant
         // TODO 4: Turn the facts into rows of text. The tests in
         // RestaurantInfoPresenterTests show some of the rows we expect, e.g.
         // "Status" / "Closed", and "Menu" / "6 dishes (1 sold out today)".
-        return []
+
+        var menuText = "\(facts.dishCount) dish"
+        if facts.dishCount > 1 { menuText += "es" }
+        if facts.soldOutCount > 0 {
+            menuText += " (\(facts.soldOutCount) sold out today)"
+        }
+
+        return [
+            InfoRowViewModel(
+                title: "Status",
+                value: facts.isOpen ? "Open now" : "Closed"
+            ),
+            InfoRowViewModel(
+                title: "Menu",
+                value: menuText
+            ),
+        ]
     }
 }
