@@ -25,6 +25,8 @@ final class RestaurantInfoPresenter: RestaurantInfoPresenterProtocol, Restaurant
 
     func didLoadFacts(_ facts: RestaurantFacts) {
         // TODO 3: Tell the view the title, and the rows to show.
+        view?.showTitle(facts.name)
+        view?.showRows(makeRows(from: facts))
     }
 
     func makeRows(from facts: RestaurantFacts) -> [InfoRowViewModel] {
