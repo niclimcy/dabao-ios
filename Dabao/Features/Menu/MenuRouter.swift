@@ -28,5 +28,11 @@ final class MenuRouter: MenuRouterProtocol {
 
     func showInfo(for restaurant: Restaurant) {
         // TODO 1: Build the Restaurant Info module with its router, and present it.
+        let infoView = RestaurantInfoRouter.createModule(restaurant: restaurant)
+        if let sheet = infoView.sheetPresentationController {
+            sheet.detents = [.medium()]
+            sheet.prefersGrabberVisible = true
+        }
+        viewController?.present(infoView, animated: true, completion: nil)
     }
 }
