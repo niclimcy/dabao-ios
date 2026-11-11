@@ -1,0 +1,19 @@
+Dabao/Features/RestaurantList/RestaurantCell.swift
+  s_7dbf98ed4bdaa7::t_fa5c3523a1c095 40-44,92-101
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "9c656cc512e5b5034def8e25ff055d3e79a61f1d",
+  "prompts": {},
+  "sessions": {
+    "s_7dbf98ed4bdaa7": {
+      "agent_id": {
+        "tool": "github-copilot",
+        "id": "03c941c6-a4de-4a13-b917-e315ee9eb822",
+        "model": "openrouter/OpenRouter/anthropic/claude-opus-5.5"
+      },
+      "human_author": "Nicholas Lim <nic.lim@foodpanda.com>"
+    }
+  }
+}
