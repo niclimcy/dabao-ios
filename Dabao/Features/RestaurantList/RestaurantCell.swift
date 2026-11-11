@@ -37,6 +37,11 @@ final class RestaurantCell: UITableViewCell {
         starsStack.axis = .horizontal
         starsStack.spacing = 2
 
+        // Expose the whole cell to VoiceOver as one element; the stars and
+        // status dot are decorative and are described in the cell's label.
+        isAccessibilityElement = true
+        accessibilityTraits = .button
+
         statusDot.layer.cornerRadius = 5
 
         let textStack = UIStackView(arrangedSubviews: [nameLabel, detailLabel, starsStack])
@@ -84,5 +89,15 @@ final class RestaurantCell: UITableViewCell {
         }
 
         statusDot.backgroundColor = restaurant.isOpen ? .systemGreen : .systemRed
+
+        let rating = restaurant.rating.formatted(.number.precision(.fractionLength(0...1)))
+        accessibilityLabel = [
+            restaurant.name,
+            "Rated \(rating) out of 5",
+            restaurant.cuisine,
+            "\(restaurant.deliveryMinutes) minutes",
+            "\(PriceFormatter.string(from: restaurant.deliveryFee)) delivery",
+            restaurant.isOpen ? "Open" : "Closed"
+        ].joined(separator: ", ")
     }
 }
