@@ -55,7 +55,7 @@ final class MenuPresenterTests: XCTestCase {
     private static let tea = MenuItem(id: "b", name: "Teh Peng", description: "", price: 2,
                                       category: "Drinks", isSoldOut: false, isSpicy: false)
 
-    private func makeRestaurant() -> Restaurant {
+    private func makeRestaurant(isOpen: Bool = true) -> Restaurant {
         Restaurant(id: "r", name: "Test Kitchen", cuisine: "Hawker", rating: 4.5,
                    deliveryMinutes: 20, deliveryFee: 2, isOpen: true,
                    imageName: "fork.knife", menu: [Self.rice, Self.tea])
@@ -105,4 +105,37 @@ final class MenuPresenterTests: XCTestCase {
 
     // TODO (Day 14): write a test that checks the "sold out" message appears
     // when the interactor reports `.soldOut`.
+    func test_soldOutMessage() {
+        let view = FakeView()
+        let presenter = MenuPresenter(view: view, interactor: FakeInteractor(), router: FakeRouter())
+        presenter.didLoadMenu(restaurant: makeRestaurant(), items: [rice, tea])
+        presenter.didFailToAdd(tea, reason: AddToCartFailure.soldOut)
+        XCTAssertEqual(view.messages.first, "Sold out")
+    }
+    
+    func test_cartUpdate_showsEmptyCart() {
+        let view = FakeView()
+        let presenter = MenuPresenter(view: view, interactor: FakeInteractor(), router: FakeRouter())
+        presenter.didLoadMenu(restaurant: makeRestaurant(), items: [rice, tea])
+
+        presenter.didUpdateCart(CartSummary(quantities: ["a": 2], itemCount: 2, total: 9))
+
+        XCTAssertEqual(view.cartBarTitle, .some("View cart · 2 items · $9.00"))
+        XCTAssertEqual(view.reloadedRows.last?.quantityText, "×2")
+        
+        // Remove items from cart
+        presenter.didUpdateCart(CartSummary(quantities: ["a": 2], itemCount: 0, total: 9))
+        XCTAssertEqual(view.cartBarTitle, .some(nil))
+    }
+
+    func test_cartUpdate_showsCartBarWithOneItem() {
+        let view = FakeView()
+        let presenter = MenuPresenter(view: view, interactor: FakeInteractor(), router: FakeRouter())
+        presenter.didLoadMenu(restaurant: makeRestaurant(), items: [rice, tea])
+
+        presenter.didUpdateCart(CartSummary(quantities: ["a": 1], itemCount: 1, total: 4.5))
+
+        XCTAssertEqual(view.cartBarTitle, .some("View cart · 1 item · $4.50"))
+        XCTAssertEqual(view.reloadedRows.last?.quantityText, "×1")
+    }
 }
