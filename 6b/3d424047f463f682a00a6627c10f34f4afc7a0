@@ -1,0 +1,32 @@
+Dabao/Features/Menu/MenuItemCell.swift
+  s_94122f97cb6a04::t_a80613947a0b3b 34,36,39,41
+  s_94122f97cb6a04::t_20bb903c9b898e 35,38,40,42-44,80-81
+Dabao/Features/Menu/MenuViewController.swift
+  s_94122f97cb6a04::t_20bb903c9b898e 178-179,184-185,202
+  s_94122f97cb6a04::t_875b30b2b7be41 39
+  s_94122f97cb6a04::t_a068fc3d2e9a53 177,183
+  s_94122f97cb6a04::t_2f4d8049d439f8 29-32,36-38,40-44,76,112
+Dabao/Features/RestaurantList/RestaurantCell.swift
+  s_94122f97cb6a04::t_a068fc3d2e9a53 29,32
+  s_94122f97cb6a04::t_20bb903c9b898e 30-31,33-34,55-56,62-63
+Dabao/Features/Cart/CartViewController.swift
+  s_94122f97cb6a04::t_20bb903c9b898e 53-54,62-64
+Dabao/Features/RestaurantList/RestaurantListViewController.swift
+  s_94122f97cb6a04::t_20bb903c9b898e 40-41
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "6b3d424047f463f682a00a6627c10f34f4afc7a0",
+  "prompts": {},
+  "sessions": {
+    "s_94122f97cb6a04": {
+      "agent_id": {
+        "tool": "github-copilot",
+        "id": "a8046a44-c206-4e53-8e83-333c05597586",
+        "model": "openrouter/OpenRouter/anthropic/claude-opus-5.5"
+      },
+      "human_author": "Nicholas Lim <nic.lim@foodpanda.com>"
+    }
+  }
+}
