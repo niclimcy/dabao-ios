@@ -31,12 +31,17 @@ final class MenuItemCell: UITableViewCell {
     }
 
     private func setUpViews() {
-        nameLabel.font = .systemFont(ofSize: 16, weight: .semibold)
-        detailLabel.font = .systemFont(ofSize: 12)
+        nameLabel.font = .preferredFont(forTextStyle: .headline)
+        nameLabel.numberOfLines = 0
+        detailLabel.font = .preferredFont(forTextStyle: .caption1)
         detailLabel.textColor = .secondaryLabel
-        detailLabel.numberOfLines = 2
-        priceLabel.font = .systemFont(ofSize: 14, weight: .medium)
-        quantityLabel.font = .systemFont(ofSize: 14, weight: .bold)
+        detailLabel.numberOfLines = 0
+        priceLabel.font = .preferredFont(forTextStyle: .subheadline)
+        priceLabel.numberOfLines = 0
+        quantityLabel.font = .preferredFont(forTextStyle: .subheadline)
+        [nameLabel, detailLabel, priceLabel, quantityLabel].forEach {
+            $0.adjustsFontForContentSizeCategory = true
+        }
         quantityLabel.textColor = UIColor(named: "AccentColor")
         spicyIcon.tintColor = .systemRed
         spicyIcon.contentMode = .scaleAspectFit
@@ -72,6 +77,8 @@ final class MenuItemCell: UITableViewCell {
 
             buttons.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12),
             buttons.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            buttons.topAnchor.constraint(greaterThanOrEqualTo: contentView.topAnchor, constant: 8),
+            buttons.bottomAnchor.constraint(lessThanOrEqualTo: contentView.bottomAnchor, constant: -8),
 
             spicyIcon.widthAnchor.constraint(equalToConstant: 14),
             spicyIcon.heightAnchor.constraint(equalToConstant: 14),

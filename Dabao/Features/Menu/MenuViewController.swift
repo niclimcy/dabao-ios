@@ -26,7 +26,20 @@ final class MenuViewController: UIViewController {
         setUpCartBar()
         setUpSpinner()
 
+        registerForTraitChanges([UITraitPreferredContentSizeCategory.self]) { (self: Self, _) in
+            self.layoutHeader()
+        }
+
         presenter.viewDidLoad()
+    }
+
+    private func layoutHeader() {
+        guard tableView.tableHeaderView != nil else { return }
+        headerView.frame.size = headerView.systemLayoutSizeFitting(
+            CGSize(width: view.bounds.width, height: UIView.layoutFittingCompressedSize.height),
+            withHorizontalFittingPriority: .required,
+            verticalFittingPriority: .fittingSizeLevel)
+        tableView.tableHeaderView = headerView
     }
 
     private func setUpTableView() {
@@ -60,7 +73,7 @@ final class MenuViewController: UIViewController {
             cartBar.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
             cartBar.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor),
             cartBar.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -12),
-            cartBar.heightAnchor.constraint(equalToConstant: 50)
+            cartBar.heightAnchor.constraint(greaterThanOrEqualToConstant: 50)
         ])
     }
 
@@ -95,9 +108,8 @@ extension MenuViewController: MenuViewProtocol {
     func showHeader(_ header: MenuHeaderViewModel) {
         title = header.title
         headerView.configure(with: header)
-        headerView.frame.size = headerView.systemLayoutSizeFitting(
-            CGSize(width: view.bounds.width, height: UIView.layoutFittingCompressedSize.height))
         tableView.tableHeaderView = headerView
+        layoutHeader()
     }
 
     func showSections(_ sections: [MenuSectionViewModel]) {
@@ -162,11 +174,15 @@ final class MenuHeaderView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        subtitleLabel.font = .systemFont(ofSize: 15)
+        subtitleLabel.font = .preferredFont(forTextStyle: .subheadline)
+        subtitleLabel.adjustsFontForContentSizeCategory = true
+        subtitleLabel.numberOfLines = 0
         subtitleLabel.textColor = .secondaryLabel
 
         closedLabel.text = "Closed now. You can browse, but not order."
-        closedLabel.font = .systemFont(ofSize: 13, weight: .semibold)
+        closedLabel.font = .preferredFont(forTextStyle: .footnote)
+        closedLabel.adjustsFontForContentSizeCategory = true
+        closedLabel.numberOfLines = 0
         closedLabel.textColor = .white
         closedLabel.backgroundColor = .systemRed
         closedLabel.textAlignment = .center
@@ -183,7 +199,7 @@ final class MenuHeaderView: UIView {
             stack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             stack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
             stack.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8),
-            closedLabel.heightAnchor.constraint(equalToConstant: 32)
+            closedLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: 32)
         ])
     }
 

@@ -26,8 +26,12 @@ final class RestaurantCell: UITableViewCell {
         photoView.layer.cornerRadius = 12
         photoView.clipsToBounds = true
 
-        nameLabel.font = .systemFont(ofSize: 17, weight: .semibold)
-        detailLabel.font = .systemFont(ofSize: 13)
+        nameLabel.font = .preferredFont(forTextStyle: .headline)
+        nameLabel.adjustsFontForContentSizeCategory = true
+        nameLabel.numberOfLines = 0
+        detailLabel.font = .preferredFont(forTextStyle: .footnote)
+        detailLabel.adjustsFontForContentSizeCategory = true
+        detailLabel.numberOfLines = 0
         detailLabel.textColor = .lightGray
 
         starsStack.axis = .horizontal
@@ -48,11 +52,15 @@ final class RestaurantCell: UITableViewCell {
         NSLayoutConstraint.activate([
             photoView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             photoView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            photoView.topAnchor.constraint(greaterThanOrEqualTo: contentView.topAnchor, constant: 12),
+            photoView.bottomAnchor.constraint(lessThanOrEqualTo: contentView.bottomAnchor, constant: -12),
             photoView.widthAnchor.constraint(equalToConstant: 64),
             photoView.heightAnchor.constraint(equalToConstant: 64),
 
             textStack.leadingAnchor.constraint(equalTo: photoView.trailingAnchor, constant: 12),
             textStack.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            textStack.topAnchor.constraint(greaterThanOrEqualTo: contentView.topAnchor, constant: 12),
+            textStack.bottomAnchor.constraint(lessThanOrEqualTo: contentView.bottomAnchor, constant: -12),
             textStack.trailingAnchor.constraint(lessThanOrEqualTo: statusDot.leadingAnchor, constant: -8),
 
             statusDot.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),

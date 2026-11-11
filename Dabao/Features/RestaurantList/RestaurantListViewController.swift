@@ -66,7 +66,8 @@ final class RestaurantListViewController: UIViewController {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.delegate = self
         tableView.register(RestaurantCell.self, forCellReuseIdentifier: RestaurantCell.reuseIdentifier)
-        tableView.rowHeight = 88
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 88
         view.addSubview(tableView)
 
         dataSource = UITableViewDiffableDataSource<Section, Restaurant>(tableView: tableView) {

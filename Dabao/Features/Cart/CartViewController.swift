@@ -50,6 +50,8 @@ final class CartViewController: UIViewController {
 
     private func setUpEmptyLabel() {
         emptyLabel.text = "Your cart is empty.\nLet's find something tasty!"
+        emptyLabel.font = .preferredFont(forTextStyle: .body)
+        emptyLabel.adjustsFontForContentSizeCategory = true
         emptyLabel.numberOfLines = 0
         emptyLabel.textAlignment = .center
         emptyLabel.textColor = .secondaryLabel
@@ -57,7 +59,9 @@ final class CartViewController: UIViewController {
         view.addSubview(emptyLabel)
         NSLayoutConstraint.activate([
             emptyLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            emptyLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+            emptyLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            emptyLabel.leadingAnchor.constraint(greaterThanOrEqualTo: view.layoutMarginsGuide.leadingAnchor),
+            emptyLabel.trailingAnchor.constraint(lessThanOrEqualTo: view.layoutMarginsGuide.trailingAnchor)
         ])
     }
 
