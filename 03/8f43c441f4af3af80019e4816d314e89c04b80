@@ -1,0 +1,26 @@
+Dabao/Features/Menu/MenuPresenter.swift
+  h_36695e5767c2ad 8
+Dabao/Features/RestaurantInfo/RestaurantInfoPresenter.swift
+  h_36695e5767c2ad 5
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "038f43c441f4af3af80019e4816d314e89c04b80",
+  "prompts": {},
+  "humans": {
+    "h_36695e5767c2ad": {
+      "author": "Nicholas Lim <nic.lim@foodpanda.com>"
+    }
+  },
+  "sessions": {
+    "s_94122f97cb6a04": {
+      "agent_id": {
+        "tool": "github-copilot",
+        "id": "a8046a44-c206-4e53-8e83-333c05597586",
+        "model": "openrouter/OpenRouter/anthropic/claude-opus-5.5"
+      },
+      "human_author": "Nicholas Lim <nic.lim@foodpanda.com>"
+    }
+  }
+}
