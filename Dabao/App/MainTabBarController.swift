@@ -34,3 +34,7 @@ final class MainTabBarController: UITabBarController {
         viewControllers?[1].tabBarItem.badgeValue = count > 0 ? "\(count)" : nil
     }
 }
+
+#Preview {
+    MainTabBarController()
+}
