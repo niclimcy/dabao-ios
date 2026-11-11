@@ -1,0 +1,26 @@
+DabaoTests/MenuPresenterTests.swift
+  s_7dbf98ed4bdaa7::t_db5e134857a006 129-138
+Dabao/Features/Menu/MenuPresenter.swift
+  s_7dbf98ed4bdaa7::t_db5e134857a006 118
+Dabao/Features/Menu/MenuItemCell.swift
+  s_7dbf98ed4bdaa7::t_db5e134857a006 98,102-105
+  s_7dbf98ed4bdaa7::t_f60a76002fb08d 106
+Dabao/Features/Menu/MenuContracts.swift
+  s_7dbf98ed4bdaa7::t_db5e134857a006 98
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "a6f2e4e7eff9d9e4592c12e077cc1f7f7ad12cdc",
+  "prompts": {},
+  "sessions": {
+    "s_7dbf98ed4bdaa7": {
+      "agent_id": {
+        "tool": "github-copilot",
+        "id": "03c941c6-a4de-4a13-b917-e315ee9eb822",
+        "model": "openrouter/OpenRouter/anthropic/claude-opus-5.5"
+      },
+      "human_author": "Nicholas Lim <nic.lim@foodpanda.com>"
+    }
+  }
+}
