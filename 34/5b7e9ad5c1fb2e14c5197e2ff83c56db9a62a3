@@ -1,0 +1,20 @@
+Dabao.xcodeproj/project.pbxproj
+  h_36695e5767c2ad 10-16,27,33-37,51-57,80,90,98-120,173,176-179,205,211-217,235-241,259-263,272-371,453-454,481-482,526-534
+DabaoTests/MenuPresenterTests.swift
+  h_36695e5767c2ad 58,108-140
+DabaoUITests/DabaoUITests.swift
+  h_36695e5767c2ad 1-43
+DabaoUITests/DabaoUITestsLaunchTests.swift
+  h_36695e5767c2ad 1-33
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "345b7e9ad5c1fb2e14c5197e2ff83c56db9a62a3",
+  "prompts": {},
+  "humans": {
+    "h_36695e5767c2ad": {
+      "author": "Nicholas Lim <nic.lim@foodpanda.com>"
+    }
+  }
+}
