@@ -26,12 +26,21 @@ final class RestaurantCell: UITableViewCell {
         photoView.layer.cornerRadius = 12
         photoView.clipsToBounds = true
 
-        nameLabel.font = .systemFont(ofSize: 17, weight: .semibold)
-        detailLabel.font = .systemFont(ofSize: 13)
+        nameLabel.font = .preferredFont(forTextStyle: .headline)
+        nameLabel.adjustsFontForContentSizeCategory = true
+        nameLabel.numberOfLines = 0
+        detailLabel.font = .preferredFont(forTextStyle: .footnote)
+        detailLabel.adjustsFontForContentSizeCategory = true
+        detailLabel.numberOfLines = 0
         detailLabel.textColor = .lightGray
 
         starsStack.axis = .horizontal
         starsStack.spacing = 2
+
+        // Expose the whole cell to VoiceOver as one element; the stars and
+        // status dot are decorative and are described in the cell's label.
+        isAccessibilityElement = true
+        accessibilityTraits = .button
 
         statusDot.layer.cornerRadius = 5
 
@@ -48,11 +57,15 @@ final class RestaurantCell: UITableViewCell {
         NSLayoutConstraint.activate([
             photoView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             photoView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            photoView.topAnchor.constraint(greaterThanOrEqualTo: contentView.topAnchor, constant: 12),
+            photoView.bottomAnchor.constraint(lessThanOrEqualTo: contentView.bottomAnchor, constant: -12),
             photoView.widthAnchor.constraint(equalToConstant: 64),
             photoView.heightAnchor.constraint(equalToConstant: 64),
 
             textStack.leadingAnchor.constraint(equalTo: photoView.trailingAnchor, constant: 12),
             textStack.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            textStack.topAnchor.constraint(greaterThanOrEqualTo: contentView.topAnchor, constant: 12),
+            textStack.bottomAnchor.constraint(lessThanOrEqualTo: contentView.bottomAnchor, constant: -12),
             textStack.trailingAnchor.constraint(lessThanOrEqualTo: statusDot.leadingAnchor, constant: -8),
 
             statusDot.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
@@ -76,5 +89,15 @@ final class RestaurantCell: UITableViewCell {
         }
 
         statusDot.backgroundColor = restaurant.isOpen ? .systemGreen : .systemRed
+
+        let rating = restaurant.rating.formatted(.number.precision(.fractionLength(0...1)))
+        accessibilityLabel = [
+            restaurant.name,
+            "Rated \(rating) out of 5",
+            restaurant.cuisine,
+            "\(restaurant.deliveryMinutes) minutes",
+            "\(PriceFormatter.string(from: restaurant.deliveryFee)) delivery",
+            restaurant.isOpen ? "Open" : "Closed"
+        ].joined(separator: ", ")
     }
 }

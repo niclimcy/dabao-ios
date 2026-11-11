@@ -33,6 +33,7 @@ protocol MenuPresenterProtocol: AnyObject {
     func didTapAdd(itemID: String)
     func didTapRemove(itemID: String)
     func didTapCartBar()
+    func didTapInfo()
 }
 
 // MARK: Interactor (the presenter asks the interactor to do things)
@@ -58,6 +59,7 @@ protocol MenuInteractorOutputProtocol: AnyObject {
 @MainActor
 protocol MenuRouterProtocol: AnyObject {
     func showCart()
+    func showInfo(for restaurant: Restaurant)
 }
 
 // MARK: - Plain data passed between layers
@@ -93,6 +95,7 @@ struct MenuItemViewModel: Equatable {
     let detail: String
     let priceText: String
     let quantityText: String?
+    let quantityAccessibilityText: String?
     let isSoldOut: Bool
     let isSpicy: Bool
 }
