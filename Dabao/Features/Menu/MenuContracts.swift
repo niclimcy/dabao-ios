@@ -95,6 +95,7 @@ struct MenuItemViewModel: Equatable {
     let detail: String
     let priceText: String
     let quantityText: String?
+    let quantityAccessibilityText: String?
     let isSoldOut: Bool
     let isSpicy: Bool
 }

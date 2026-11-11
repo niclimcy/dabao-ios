@@ -95,8 +95,14 @@ final class MenuItemCell: UITableViewCell {
         priceLabel.text = row.priceText
         spicyIcon.isHidden = !row.isSpicy
         quantityLabel.text = row.quantityText
+        quantityLabel.accessibilityLabel = row.quantityAccessibilityText.map { "\(row.name), \($0)" }
         quantityLabel.isHidden = row.quantityText == nil
         removeButton.isHidden = row.quantityText == nil
+
+        addButton.accessibilityLabel = "Add \(row.name)"
+        addButton.accessibilityValue = row.quantityAccessibilityText
+        removeButton.accessibilityLabel = "Remove \(row.name)"
+        removeButton.accessibilityValue = row.quantityAccessibilityText
 
         // Sold-out dishes are greyed out.
         contentView.alpha = row.isSoldOut ? 0.4 : 1.0

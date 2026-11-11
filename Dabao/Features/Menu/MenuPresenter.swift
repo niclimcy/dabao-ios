@@ -115,6 +115,7 @@ final class MenuPresenter: MenuPresenterProtocol, MenuInteractorOutputProtocol {
             detail: item.description,
             priceText: PriceFormatter.string(from: item.price),
             quantityText: quantity > 0 ? "×\(quantity)" : nil,
+            quantityAccessibilityText: quantity > 0 ? "\(quantity) in cart" : nil,
             isSoldOut: item.isSoldOut,
             isSpicy: item.isSpicy
         )

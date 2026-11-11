@@ -138,4 +138,14 @@ final class MenuPresenterTests: XCTestCase {
         XCTAssertEqual(view.cartBarTitle, .some("View cart · 1 item · $4.50"))
         XCTAssertEqual(view.reloadedRows.last?.quantityText, "×1")
     }
+
+    func test_cartUpdate_givesSpokenQuantityForVoiceOver() {
+        let view = FakeView()
+        let presenter = MenuPresenter(view: view, interactor: FakeInteractor(), router: FakeRouter())
+        presenter.didLoadMenu(restaurant: makeRestaurant(), items: [rice, tea])
+
+        presenter.didUpdateCart(CartSummary(quantities: ["a": 2], itemCount: 2, total: 9))
+
+        XCTAssertEqual(view.reloadedRows.last?.quantityAccessibilityText, "2 in cart")
+    }
 }
